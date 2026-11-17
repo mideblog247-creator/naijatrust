@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NaijaTrust helps Nigerians check online vendors and businesses before making payments.">
+  <title>NaijaTrust | Buy Smart. Stay Safe.</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7faf8;
+      color: #18352a;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #103b2d;
+      color: white;
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #53d38b;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #103b2d, #176346);
+      color: white;
+      padding: 75px 6% 85px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+      color: #63e59c;
+    }
+
+    .hero p {
+      color: #d8eee2;
+      max-width: 550px;
+      margin: 0 auto 28px;
+    }
+
+    .search-box {
+      background: white;
+      max-width: 650px;
+      margin: auto;
+      padding: 8px;
+      border-radius: 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .search-box input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px;
+      border: none;
+      outline: none;
+      font-size: 15px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+      padding: 13px 20px;
+    }
+
+    .search-btn {
+      background: #16834e;
+      color: white;
+    }
+
+    .section {
+      padding: 55px 6%;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .section-heading p {
+      color: #718078;
+      font-size: 14px;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .category {
+      background: white;
+      border: 1px solid #dce8e0;
+      color: #28533c;
+      border-radius: 25px;
+      padding: 10px 18px;
+    }
+
+    .category.active,
+    .category:hover {
+      background: #176b46;
+      color: white;
+    }
+
+    .vendor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .vendor-card {
+      background: white;
+      border: 1px solid #e3ece6;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.035);
+    }
+
+    .vendor-icon {
+      width: 48px;
+      height: 48px;
+      background: #e4f5eb;
+      color: #176b46;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-size: 23px;
+      margin-bottom: 14px;
+    }
+
+    .vendor-card h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .vendor-card p {
+      color: #75837b;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      background: #fff2d8;
+      color: #986000;
+    }
+
+    .status.verified {
+      background: #e0f6e9;
+      color: #147744;
+    }
+
+    .status.unverified {
+      background: #edf0f2;
+      color: #59656b;
+    }
+
+    .view-btn {
+      background: #edf7f0;
+      color: #176b46;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 30px;
+      color: #718078;
+      display: none;
+    }
+
+    .cta {
+      background: #e9f5ed;
+      text-align: center;
+      padding: 55px 6%;
+    }
+
+    .cta h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #607268;
+      margin-bottom: 20px;
+    }
+
+    .primary-btn {
+      background: #176b46;
+      color: white;
+    }
+
+    footer {
+      background: #103b2d;
+      color: #d6e7dc;
+      padding: 30px 6%;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    footer p {
+      margin-top: 8px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 10;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 460px;
+      margin: 30px auto;
+      padding: 25px;
+      border-radius: 15px;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 8px;
+    }
+
+    .modal-content p {
+      color: #718078;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .modal-content input,
+    .modal-content select {
+      width: 100%;
+      padding: 13px;
+      margin: 8px 0;
+      border: 1px solid #dce8e0;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .submit-btn {
+      background: #176b46;
+      color: white;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .close-btn {
+      float: right;
+      background: #edf0ed;
+      padding: 7px 12px;
+    }
+
+    .notice {
+      background: #fff7e5;
+      color: #765313;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      margin: 12px 0;
+    }
+
+    @media(max-width: 600px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      nav {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .hero {
+        padding: 55px 5%;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box button {
+        width: 100%;
+      }
+
+      .section {
+        padding: 40px 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Naija<span>Trust</span></div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#vendors">Businesses</a>
+    <a href="#register">Register</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>Buy Smart.<br><span>Stay Safe.</span></h1>
+  <p>
+    Check online vendors and businesses before
+    sending your money. Make smarter buying decisions
+    with NaijaTrust.
+  </p>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search business or vendor name..."
+    >
+    <button class="search-btn" onclick="searchVendors()">
+      Search Now
+    </button>
+  </div>
+</section>
+
+<section class="section" id="vendors">
+
+  <div class="section-heading">
+    <h2>Explore Businesses</h2>
+    <p>Discover businesses listed on NaijaTrust.</p>
+  </div>
+
+  <div class="categories">
+    <button class="category active" onclick="filterCategory('All',this)">All</button>
+    <button class="category" onclick="filterCategory('Fashion',this)">Fashion</button>
+    <button class="category" onclick="filterCategory('Gadgets',this)">Gadgets</button>
+    <button class="category" onclick="filterCategory('Food',this)">Food</button>
+    <button class="category" onclick="filterCategory('Beauty',this)">Beauty</button>
+  </div>
+
+  <div class="vendor-grid" id="vendorGrid">
+
+    <div class="vendor-card" data-name="demo fashion store" data-category="Fashion">
+      <div class="vendor-icon">👕</div>
+      <h3>Demo Fashion Store</h3>
+      <p>Fashion & Clothing</p>
+      <span class="status unverified">Demo profile</span>
+      <button class="view-btn" onclick="showDemo()">View Profile</button>
+    </div>
+
+    <div class="vendor-card" data-name="demo gadget world" data-category="Gadgets">
+      <div class="vendor-icon">📱</div>
+      <h3>Demo Gadget World</h3>
+      <p>Phones & Electronics</p>
+      <span class="status unverified">Demo profile</span>
+      <button class="view-btn" onclick="showDemo()">View Profile</button>
+    </div>
+
+    <div class="vendor-card" data-name="demo food kitchen" data-category="Food">
+      <div class="vendor-icon">🍲</div>
+      <h3>Demo Food Kitchen</h3>
+      <p>Food & Catering</p>
+      <span class="status unverified">Demo profile</span>
+      <button class="view-btn" onclick="showDemo()">View Profile</button>
+    </div>
+
+  </div>
+
+  <div class="empty" id="emptyMessage">
+    No matching businesses found.
+  </div>
+
+</section>
+
+<section class="cta" id="register">
+  <h2>Are You a Business Owner?</h2>
+  <p>Submit your business details to get listed on NaijaTrust.</p>
+  <button class="primary-btn" onclick="openModal()">
+    Register Your Business
+  </button>
+</section>
+
+<footer>
+  <div class="logo">Naija<span>Trust</span></div>
+  <p>Building a safer online marketplace for Nigerians.</p>
+  <p>© 2026 NaijaTrust. All rights reserved.</p>
+</footer>
+
+<div class="modal" id="registerModal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal()">✕</button>
+
+    <h2>Register Your Business</h2>
+    <p>Submit your business information for review.</p>
+
+    <div class="notice">
+      Submitting this form does not automatically verify your business.
+    </div>
+
+    <form id="businessForm">
+
+      <input
+        type="text"
+        id="businessName"
+        placeholder="Business name"
+        required
+      >
+
+      <select id="businessCategory" required>
+        <option value="">Select category</option>
+        <option>Fashion</option>
+        <option>Gadgets</option>
+        <option>Food</option>
+        <option>Beauty</option>
+        <option>Other</option>
+      </select>
+
+      <input
+        type="tel"
+        id="businessPhone"
+        placeholder="Business phone number"
+        required
+      >
+
+      <input
+        type="text"
+        id="businessLocation"
+        placeholder="Business location"
+        required
+      >
+
+      <input
+        type="url"
+        id="businessWebsite"
+        placeholder="Website or social media link (optional)"
+      >
+
+      <button type="submit" class="submit-btn">
+        Submit Business
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<script>
+
+  function searchVendors() {
+    const query = document
+      .getElementById("searchInput")
+      .value.toLowerCase()
+      .trim();
+
+    const cards = document.querySelectorAll(".vendor-card");
+    let count = 0;
+
+    cards.forEach(card => {
+      const name = card.dataset.name;
+      const category = card.dataset.category.toLowerCase();
+
+      const match = name.includes(query) ||
+                    category.includes(query);
+
+      card.style.display = match ? "block" : "none";
+
+      if (match) count++;
+    });
+
+    document.getElementById("emptyMessage").style.display =
+      count === 0 ? "block" : "none";
+  }
+
+  document.getElementById("searchInput")
+    .addEventListener("input", searchVendors);
+
+  function filterCategory(category, button) {
+    document.querySelectorAll(".category").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    let count = 0;
+
+    document.querySelectorAll(".vendor-card").forEach(card => {
+      const match = category === "All" ||
+                    card.dataset.category === category;
+
+      card.style.display = match ? "block" : "none";
+
+      if (match) count++;
+    });
+
+    document.getElementById("searchInput").value = "";
+
+    document.getElementById("emptyMessage").style.display =
+      count === 0 ? "block" : "none";
+  }
+
+  function openModal() {
+    document.getElementById("registerModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("registerModal").style.display = "none";
+  }
+
+  function showDemo() {
+    alert("This is a demonstration profile. Real business verification will be added in a later development phase.");
+  }
+
+  document.getElementById("businessForm")
+    .addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      alert(
+        "Thank you! Your form is working as a demonstration. " +
+        "Permanent business registration will be enabled when we connect our database."
+      );
+
+      this.reset();
+      closeModal();
+    });
+
+</script>
+
+</body>
+</html>
